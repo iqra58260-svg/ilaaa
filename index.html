@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>NUR FADILA — 18th Birthday Edition 🎂</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Fredoka:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            cute: ['"Fredoka"', 'sans-serif'],
+            sans: ['"DM Sans"', 'sans-serif'],
+          },
+          colors: {
+            cream: '#FFF9F5',
+            blush: '#FCECE8',
+            peach: '#FDE2D2',
+            charcoal: '#231F20',
+            warmgray: '#6E6562',
+            berry: '#E06A7B',
+            berryDark: '#C85263',
+            butter: '#F6C453',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FFF9F5;
+      color: #231F20;
+      overflow-x: hidden;
+    }
+
+    /* Animasi Piringan Musik & Equalizer */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-disc { animation: spinSlow 7s linear infinite; }
+    .paused-disc { animation-play-state: paused; }
+
+    @keyframes equalizing {
+      0%, 100% { height: 4px; }
+      50% { height: 12px; }
+    }
+    .eq-bar { animation: equalizing 0.75s ease-in-out infinite; }
+    .eq-bar:nth-child(2) { animation-delay: 0.2s; }
+    .eq-bar:nth-child(3) { animation-delay: 0.4s; }
+    .eq-paused .eq-bar { animation: none; height: 4px; }
+
+    /* Animasi Stiker Mengambang Lucu */
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px) rotate(-4deg); }
+      50% { transform: translateY(-7px) rotate(4deg); }
+    }
+    .sticker-float { animation: floaty 3.5s ease-in-out infinite; }
+    .sticker-float-delay { animation: floaty 4s ease-in-out 1.2s infinite; }
+
+    /* Efek Selotip Washi Tape */
+    .washi-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 84px;
+      height: 22px;
+      background: rgba(246, 196, 83, 0.65);
+      border-left: 2px dashed rgba(255,255,255,0.6);
+      border-right: 2px dashed rgba(255,255,255,0.6);
+      z-index: 10;
+    }
+
+    /* Animasi Api Lilin Kue Ulang Tahun */
+    @keyframes flicker {
+      0%, 100% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 1; }
+      25% { transform: translateX(-50%) scale(1.08, 0.94) rotate(2deg); opacity: 0.92; }
+      50% { transform: translateX(-50%) scale(0.95, 1.06) rotate(-1deg); opacity: 1; }
+      75% { transform: translateX(-50%) scale(1.05, 0.96) rotate(3deg); opacity: 0.95; }
+    }
+    .candle-flame {
+      animation: flicker 0.55s infinite alternate;
+      transform-origin: bottom center;
+      transition: all 0.4s ease;
+    }
+    .candle-flame.blown-out {
+      opacity: 0 !important;
+      transform: translateX(-50%) scale(0) translateY(-10px) !important;
+      animation: none;
+    }
+
+    /* Animasi Asap Lilin Setelah Ditiup */
+    @keyframes smokeRise {
+      0% { opacity: 0; transform: translate(-50%, 0) scale(0.5); }
+      30% { opacity: 0.75; }
+      100% { opacity: 0; transform: translate(-40%, -38px) scale(1.6); }
+    }
+    .smoke-puff {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .smoke-puff.active {
+      animation: smokeRise 1.8s ease-out forwards;
+    }
+
+    img { background-color: #F3E4DF; }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-berry selection:text-white">
+
+  <!-- LAYAR PEMBUKA LUCU -->
+  <div id="welcomeOverlay" class="fixed inset-0 z-50 bg-blush text-charcoal flex flex-col items-center justify-center px-6 text-center transition-opacity duration-500">
+    <div class="text-4xl mb-3 sticker-float">🎂✨🎀</div>
+    <span class="px-3.5 py-1 rounded-full bg-white text-berry text-xs font-cute font-semibold tracking-wide shadow-sm mb-3">
+      Special 18th Issue • 28 Nov 2026
+    </span>
+    <h1 class="font-serif text-4xl sm:text-6xl font-black tracking-tight text-charcoal mb-2">
+      Nur Fadila
+    </h1>
+    <p class="text-sm sm:text-base text-warmgray max-w-xs sm:max-w-md mb-7 leading-relaxed">
+      Ada majalah mini lucu spesial buat kamu yang hari ini resmi 18 tahun! Nyalain suaranya dulu ya~
+    </p>
+    <button onclick="openMagazine()" class="w-full max-w-xs py-3.5 px-6 rounded-full bg-berry hover:bg-berryDark text-white font-cute text-sm tracking-wider font-semibold transition transform active:scale-95 shadow-lg shadow-berry/30 cursor-pointer">
+      Buka Majalahnya 💌
+    </button>
+  </div>
+
+  <!-- PEMUTAR MUSIK MINI DI POJOK BAWAH -->
+  <div class="fixed bottom-4 right-4 z-40 flex items-center gap-2 bg-white/95 text-charcoal px-3 py-2 rounded-full shadow-lg border border-berry/20 backdrop-blur-md">
+    <div id="vinylDisc" class="w-7 h-7 rounded-full bg-gradient-to-tr from-berry via-rose-400 to-butter flex items-center justify-center spin-disc paused-disc shrink-0">
+      <div class="w-2 h-2 rounded-full bg-white"></div>
+    </div>
+    <div class="text-left">
+      <p id="trackTitle" class="text-[11px] font-cute font-semibold text-charcoal leading-none">HBD Piano</p>
+      <p id="trackSubtitle" class="text-[9px] text-warmgray mt-0.5 leading-none">Tap play</p>
+    </div>
+    <div id="eqBars" class="flex items-end gap-0.5 h-3 eq-paused px-0.5">
+      <span class="w-0.5 bg-berry eq-bar"></span>
+      <span class="w-0.5 bg-berry eq-bar"></span>
+      <span class="w-0.5 bg-berry eq-bar"></span>
+    </div>
+    <button onclick="toggleMusic()" class="w-7 h-7 rounded-full bg-berry text-white flex items-center justify-center hover:bg-berryDark transition cursor-pointer" aria-label="Play or Pause">
+      <svg id="playIcon" class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="pauseIcon" class="w-3 h-3 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+  </div>
+
+  <!-- FILE AUDIO OPSIONAL -->
+  <audio id="customAudio" src="lagu.mp3" loop preload="auto"></audio>
+
+  <!-- 1. SAMPUL MAJALAH (THE COVER) -->
+  <header class="relative min-h-[100svh] w-full flex flex-col justify-between bg-charcoal text-white overflow-hidden">
+    <!-- Foto Sampul: cover.jpg -->
+    <img src="image/WhatsApp Image 2026-11-25 at 14.17.18.jpeg" alt="Nur Fadila Cover" class="absolute inset-0 w-full h-full object-cover object-center opacity-90" />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80"></div>
+
+    <!-- Header Majalah -->
+    <div class="relative z-10 pt-6 sm:pt-8 px-5 sm:px-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-[10px] sm:text-xs font-cute tracking-wider uppercase mb-3">
+        <span>✨ Edition No. 18</span>
+        <span>•</span>
+        <span>28 Nov 2026</span>
+      </div>
+      <h1 class="font-serif text-[2.7rem] sm:text-7xl md:text-8xl font-black tracking-tight uppercase leading-none drop-shadow">
+        NUR FADILA
+      </h1>
+      <div class="mt-2 inline-block bg-berry text-white font-cute text-xs sm:text-sm px-4 py-1 rounded-full shadow-md transform -rotate-1">
+        Official 18th Birthday Issue 🎀
+      </div>
+    </div>
+
+    <!-- Stiker Dekorasi Lucu -->
+    <div class="relative z-10 px-5 sm:px-10 pb-8 max-w-4xl mx-auto w-full">
+      <div class="bg-white/95 text-charcoal p-4 sm:p-5 rounded-2xl shadow-xl backdrop-blur-md border border-white max-w-md relative">
+        <span class="absolute -top-4 -right-3 text-2xl sm:text-3xl sticker-float">🍓</span>
+        <span class="inline-block text-[10px] font-cute uppercase tracking-wider bg-peach text-berryDark px-2.5 py-0.5 rounded-full font-bold mb-1.5">
+          Cover Story
+        </span>
+        <h2 class="font-cute text-xl sm:text-2xl font-bold leading-snug text-charcoal">
+          Happy 18th Birthday, Fadila! 🥳
+        </h2>
+        <p class="text-xs sm:text-sm text-warmgray mt-1 leading-relaxed">
+          Edisi spesial buat merayakan hari lahirnya si paling manis sejak 28 November 2008.
+        </p>
+      </div>
+
+      <div class="mt-5 text-center">
+        <a href="#catatan" class="inline-flex flex-col items-center text-[11px] font-cute tracking-wider text-white/90 hover:text-white transition">
+          <span>Scroll pelan-pelan ya</span>
+          <span class="mt-0.5 text-base animate-bounce">👇</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. CATATAN UTAMA (BIRTHDAY NOTE) -->
+  <section id="catatan" class="py-16 sm:py-24 px-5 sm:px-10 max-w-4xl mx-auto">
+    <div class="flex items-center justify-between text-xs font-cute text-berry mb-8">
+      <span class="bg-blush px-3 py-1 rounded-full">01 • Birthday Note 💌</span>
+      <span>28.11.2026</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <!-- Foto Utama: editor.jpg -->
+      <div class="md:col-span-5 relative">
+        <div class="washi-tape"></div>
+        <div class="bg-white p-3 pb-4 rounded-2xl shadow-lg border border-rose-100 transform -rotate-1">
+          <img src="image/editor.jpeg" alt="Nur Fadila" class="w-full aspect-[3/4] object-cover rounded-xl" />
+          <p class="font-cute text-xs text-warmgray mt-3 text-center">
+            ✨ Si Bintang Utama Hari Ini (18 y.o) ✨
+          </p>
+        </div>
+      </div>
+
+      <div class="md:col-span-7 space-y-4">
+        <span class="inline-block text-xs font-cute font-bold text-berry">Halo Nur Fadila! 👋</span>
+        <h2 class="font-cute text-2xl sm:text-4xl font-bold leading-tight text-charcoal">
+          Selamat ulang tahun yang ke-18 ya! 🎉
+        </h2>
+        <div class="text-sm sm:text-base leading-relaxed text-stone-700 space-y-3.5 bg-white p-5 sm:p-6 rounded-2xl border border-rose-100 shadow-sm">
+          <p>
+            Nggak kerasa sekarang kamu udah resmi 18 tahun aja. Dari lahir tanggal <strong>28 November 2008</strong> sampai hari ini, kamu udah tumbuh jadi cewek yang hebat, baik banget, dan selalu punya cara sendiri buat bikin orang di sekitar kamu ikut senang.
+          </p>
+          <p>
+            Di umur yang baru ini, semoga apa pun yang lagi kamu kejar dan impikan satu-satu bisa tercapai. Semoga kamu selalu sehat, makin bahagia, dijauhin dari hal-hal yang bikin sedih, dan senyum kamu nggak pernah hilang.
+          </p>
+          <p>
+            Makasih udah selalu jadi diri kamu sendiri dan udah hadir di hari-hariku. Enjoy your special day, Fadila! 🌷
+          </p>
+        </div>
+        <div class="flex items-center justify-between px-2 pt-1">
+          <p class="font-cute text-sm text-warmgray">Dari orang yang selalu sayang kamu ❤️</p>
+          <span class="px-3 py-1 rounded-full bg-butter/30 text-charcoal font-cute font-bold text-xs">18th Chapter ✨</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. RUBRIK FOTO MASA KECIL (THROWBACK) -->
+  <section class="py-16 sm:py-24 px-5 sm:px-10 bg-blush/70 rounded-3xl mx-3 sm:mx-8 border border-rose-100">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center justify-between text-xs font-cute text-berry mb-8">
+        <span class="bg-white px-3 py-1 rounded-full shadow-sm">02 • Mini Fadila 🧸</span>
+        <span>2008 → 2026</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <!-- Foto Masa Kecil: kecil.jpg -->
+        <div class="md:col-span-5 flex justify-center relative">
+          <div class="washi-tape"></div>
+          <div class="bg-white p-3 pb-5 rounded-2xl shadow-lg border border-rose-100 w-full max-w-xs transform rotate-2 hover:rotate-0 transition duration-300">
+            <img src="image/kecil.jpg" alt="Nur Fadila Kecil" class="w-full aspect-square object-cover rounded-xl" />
+            <div class="mt-3 text-center">
+              <p class="font-cute font-bold text-base text-charcoal">Versi Sachet (2008) 🍼</p>
+              <p class="text-[11px] text-warmgray mt-0.5">Lucunya awet sampai 18 tahun!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-7 space-y-3.5 text-center md:text-left">
+          <span class="inline-block text-xs font-cute bg-white text-berryDark px-3.5 py-1 rounded-full font-semibold shadow-sm">
+            Flashback Time 🎞️
+          </span>
+          <h2 class="font-cute text-2xl sm:text-4xl font-bold leading-tight text-charcoal">
+            Dari foto kecil ini sampai sekarang udah 18 tahun
+          </h2>
+          <p class="text-sm sm:text-base leading-relaxed text-stone-700">
+            Setiap lihat foto kecil kamu ini rasanya gemas banget. Anak kecil kelahiran 28 November 2008 yang dulu polos banget, sekarang udah tumbuh dewasa dan makin cantik tiap harinya.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. GALERI FOTO (4 FOTO POLAROID LUCU) -->
+  <section class="py-16 sm:py-24 px-5 sm:px-10 max-w-4xl mx-auto">
+    <div class="flex items-center justify-between text-xs font-cute text-berry mb-4">
+      <span class="bg-blush px-3 py-1 rounded-full">03 • Photo Dump 📸</span>
+      <span>My Favorites</span>
+    </div>
+
+    <div class="mb-10">
+      <h2 class="font-cute text-2xl sm:text-4xl font-bold mb-1.5">Kumpulan Foto Favorit</h2>
+      <p class="text-sm text-warmgray">
+        Beberapa potret terbaik kamu yang selalu bikin aku senyum-senyum sendiri.
+      </p>
+    </div>
+
+    <!-- Grid 2 Kolom di HP & Laptop -->
+    <div class="grid grid-cols-2 gap-4 sm:gap-7">
+      <!-- Galeri 1: galeri-1.jpg -->
+      <figure class="bg-white p-2 sm:p-3 pb-4 rounded-2xl shadow-md border border-rose-100 transform -rotate-1 hover:rotate-0 transition">
+        <div class="overflow-hidden rounded-xl">
+          <img src="image/galeri-1.jpeg" alt="Foto 1" class="w-full aspect-[3/4] object-cover hover:scale-105 transition duration-500" />
+        </div>
+        <figcaption class="mt-2.5 px-1">
+          <p class="font-cute font-bold text-xs sm:text-base text-charcoal">01. Pose Gemas Andalan 🥺</p>
+          <p class="text-[10px] sm:text-xs text-warmgray">Lucu banget sih ini</p>
+        </figcaption>
+      </figure>
+
+      <!-- Galeri 2: galeri-2.jpg -->
+      <figure class="bg-white p-2 sm:p-3 pb-4 rounded-2xl shadow-md border border-rose-100 mt-5 sm:mt-10 transform rotate-1 hover:rotate-0 transition">
+        <div class="overflow-hidden rounded-xl">
+          <img src="image/galeri-2.jpeg" alt="Foto 2" class="w-full aspect-[3/4] object-cover hover:scale-105 transition duration-500" />
+        </div>
+        <figcaption class="mt-2.5 px-1">
+          <p class="font-cute font-bold text-xs sm:text-base text-charcoal">02. Outfit Check 🖤</p>
+          <p class="text-[10px] sm:text-xs text-warmgray">Kece banget gayanya</p>
+        </figcaption>
+      </figure>
+
+      <!-- Galeri 3: galeri-3.jpg -->
+      <figure class="bg-white p-2 sm:p-3 pb-4 rounded-2xl shadow-md border border-rose-100 transform rotate-1 hover:rotate-0 transition">
+        <div class="overflow-hidden rounded-xl">
+          <img src="image/galeri-3.jpeg" alt="Foto 3" class="w-full aspect-[3/4] object-cover hover:scale-105 transition duration-500" />
+        </div>
+        <figcaption class="mt-2.5 px-1">
+          <p class="font-cute font-bold text-xs sm:text-base text-charcoal">03. Cozy & Natural 🌸</p>
+          <p class="text-[10px] sm:text-xs text-warmgray">Manis tanpa usaha</p>
+        </figcaption>
+      </figure>
+
+      <!-- Galeri 4: galeri-4.jpg -->
+      <figure class="bg-white p-2 sm:p-3 pb-4 rounded-2xl shadow-md border border-rose-100 mt-5 sm:mt-10 transform -rotate-1 hover:rotate-0 transition">
+        <div class="overflow-hidden rounded-xl">
+          <img src="image/galeri-4.jpeg" alt="Foto 4" class="w-full aspect-[3/4] object-cover hover:scale-105 transition duration-500" />
+        </div>
+        <figcaption class="mt-2.5 px-1">
+          <p class="font-cute font-bold text-xs sm:text-base text-charcoal">04. Pink Vibes & Smile 🦋</p>
+          <p class="text-[10px] sm:text-xs text-warmgray">28 Nov 2026</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5. KUE ULANG TAHUN INTERAKTIF & TIUP LILIN -->
+  <section class="py-12 sm:py-20 px-5 sm:px-10 max-w-3xl mx-auto text-center">
+    <div class="bg-gradient-to-b from-blush to-peach/60 p-7 sm:p-12 rounded-3xl shadow-xl border border-rose-200 relative overflow-hidden">
+      <!-- Hiasan Stiker -->
+      <span class="absolute top-4 left-5 text-2xl sticker-float">🎈</span>
+      <span class="absolute top-5 right-5 text-2xl sticker-float-delay">🎊</span>
+
+      <span class="inline-block px-3.5 py-1 rounded-full bg-white text-berry font-cute text-xs font-semibold shadow-sm mb-3">
+        Make a Wish Time! ✨
+      </span>
+      <h2 class="font-cute text-2xl sm:text-4xl font-bold text-charcoal">
+        Waktunya Tiup Lilin ke-18!
+      </h2>
+      <p id="cakeInstruction" class="text-xs sm:text-sm text-warmgray max-w-md mx-auto mt-1.5">
+        Tutup mata, berdoa dulu dalam hati, terus tiup lilinnya di bawah ini ya!
+      </p>
+
+      <!-- ANIMASI KUE ULANG TAHUN LUCU -->
+      <div class="relative mx-auto mt-14 mb-6 w-60 h-52 flex flex-col items-center justify-end select-none">
+
+        <!-- LILIN ANGKA 1 & 8 -->
+        <div class="flex items-end gap-5 z-20 -mb-1">
+          <!-- Lilin 1 -->
+          <div class="relative flex flex-col items-center">
+            <!-- Asap saat ditiup -->
+            <div id="smoke1" class="smoke-puff absolute -top-7 left-1/2 w-4 h-4 rounded-full bg-stone-400/60 blur-[2px]"></div>
+            <!-- Api Lilin 1 -->
+            <div id="flame1" class="candle-flame absolute -top-7 left-1/2 w-4 h-6 rounded-full bg-gradient-to-t from-orange-500 via-amber-300 to-yellow-100 shadow-[0_0_16px_#F59E0B]"></div>
+            <!-- Batang Lilin 1 -->
+            <div class="w-4 h-11 rounded-t-md bg-repeating-linear bg-gradient-to-b from-berry to-rose-400 border-2 border-white shadow-sm flex items-center justify-center text-white font-cute font-bold text-xs">
+              1
+            </div>
+          </div>
+
+          <!-- Lilin 8 -->
+          <div class="relative flex flex-col items-center">
+            <!-- Asap saat ditiup -->
+            <div id="smoke2" class="smoke-puff absolute -top-7 left-1/2 w-4 h-4 rounded-full bg-stone-400/60 blur-[2px]"></div>
+            <!-- Api Lilin 8 -->
+            <div id="flame2" class="candle-flame absolute -top-7 left-1/2 w-4 h-6 rounded-full bg-gradient-to-t from-orange-500 via-amber-300 to-yellow-100 shadow-[0_0_16px_#F59E0B]"></div>
+            <!-- Batang Lilin 8 -->
+            <div class="w-4 h-11 rounded-t-md bg-gradient-to-b from-berry to-rose-400 border-2 border-white shadow-sm flex items-center justify-center text-white font-cute font-bold text-xs">
+              8
+            </div>
+          </div>
+        </div>
+
+        <!-- TINGKAT ATAS KUE -->
+        <div class="relative w-36 h-14 bg-[#FFFDF9] rounded-t-2xl border-2 border-rose-200 shadow-inner z-10 flex items-center justify-center overflow-hidden">
+          <!-- Lelehan Krim Pink -->
+          <div class="absolute top-0 inset-x-0 h-5 bg-berry rounded-b-xl"></div>
+          <div class="absolute top-3 left-3 w-3.5 h-5 bg-berry rounded-full"></div>
+          <div class="absolute top-3 left-10 w-3 h-4 bg-berry rounded-full"></div>
+          <div class="absolute top-3 right-9 w-3.5 h-5 bg-berry rounded-full"></div>
+          <div class="absolute top-3 right-3 w-3 h-4 bg-berry rounded-full"></div>
+          <!-- Wajah Lucu di Kue -->
+          <div class="mt-4 flex items-center gap-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-charcoal"></span>
+            <span class="text-[10px] text-berry font-bold">◡</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-charcoal"></span>
+          </div>
+        </div>
+
+        <!-- TINGKAT BAWAH KUE -->
+        <div class="relative w-52 h-16 bg-peach rounded-t-xl border-2 border-rose-200 shadow-md z-10 flex items-center justify-around px-4 overflow-hidden">
+          <!-- Lelehan Krim Putih -->
+          <div class="absolute top-0 inset-x-0 h-4 bg-white rounded-b-lg"></div>
+          <div class="absolute top-2 left-5 w-4 h-4 bg-white rounded-full"></div>
+          <div class="absolute top-2 left-16 w-4 h-5 bg-white rounded-full"></div>
+          <div class="absolute top-2 right-16 w-4 h-4 bg-white rounded-full"></div>
+          <div class="absolute top-2 right-5 w-4 h-5 bg-white rounded-full"></div>
+          <!-- Taburan Sprinkle -->
+          <span class="mt-3 text-xs">🍓</span>
+          <span class="mt-4 font-cute text-[11px] font-bold text-berryDark tracking-wide">FADILA 18</span>
+          <span class="mt-3 text-xs">🍓</span>
+        </div>
+
+        <!-- PIRING KUE -->
+        <div class="w-60 h-3.5 bg-white rounded-full shadow-md border border-stone-200"></div>
+      </div>
+
+      <!-- TOMBOL TIUP LILIN & MIKROFON -->
+      <div class="space-y-3">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5">
+          <button id="blowBtn" onclick="blowCandles()" class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-berry hover:bg-berryDark text-white font-cute text-xs sm:text-sm tracking-wider font-semibold shadow-lg shadow-berry/30 transition transform active:scale-95 cursor-pointer">
+            🌬️ Tiup Lilin Sekarang!
+          </button>
+          <button id="micBtn" onclick="enableMicBlow()" class="w-full sm:w-auto px-5 py-3.5 rounded-full bg-white hover:bg-rose-50 text-berryDark border border-berry/30 font-cute text-xs tracking-wider font-semibold transition cursor-pointer">
+            🎤 Tiup Pakai Mic HP
+          </button>
+        </div>
+
+        <p id="micStatus" class="hidden text-[11px] font-cute text-berryDark animate-pulse">
+          🎙️ Mikrofon aktif! Coba tiup ke arah layar HP kamu sekarang~
+        </p>
+
+        <!-- KARTU KEJUTAN SETELAH LILIN DITIUP -->
+        <div id="wishCard" class="hidden mt-5 bg-white p-5 rounded-2xl border-2 border-butter shadow-lg max-w-md mx-auto transform transition-all">
+          <p class="text-2xl mb-1">🎉🎂🥳</p>
+          <h3 class="font-cute text-lg sm:text-xl font-bold text-charcoal">
+            Yeay! Selamat Ulang Tahun ke-18, Nur Fadila!
+          </h3>
+          <p class="text-xs sm:text-sm text-warmgray mt-1.5 leading-relaxed">
+            Semoga semua doa baik kamu hari ini langsung dikabulin semesta. Happy birthday ya kesayangan! ❤️
+          </p>
+          <button onclick="relightCandles()" class="mt-3 text-[11px] font-cute text-berry underline cursor-pointer">
+            Nyalain lilinnya lagi 🔥
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-10 text-xs font-cute text-warmgray">
+      Dibuat khusus dengan ❤️ untuk Nur Fadila • 28 November 2026
+    </p>
+  </section>
+
+  <!-- SCRIPT MUSIK PIANO & ANIMASI TIUP LILIN -->
+  <script>
+    let audioCtx = null;
+    let masterGain = null;
+    let reverbNode = null;
+    let isPlaying = false;
+    let melodyTimer = null;
+    let stepIndex = 0;
+    let useCustomMp3 = false;
+    let candlesBlown = false;
+    let micStream = null;
+
+    const customAudio = document.getElementById('customAudio');
+    const vinylDisc = document.getElementById('vinylDisc');
+    const eqBars = document.getElementById('eqBars');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const trackTitle = document.getElementById('trackTitle');
+    const trackSubtitle = document.getElementById('trackSubtitle');
+
+    customAudio.addEventListener('canplaythrough', () => {
+      useCustomMp3 = true;
+      trackTitle.textContent = 'Birthday Song';
+    });
+
+    // Aransemen Piano Hangat "Happy Birthday"
+    const songSteps = [
+      { notes: [261.63], chord: [174.61, 220.00], dur: 340 },
+      { notes: [261.63], chord: [], dur: 180 },
+      { notes: [293.66], chord: [174.61, 220.00, 261.63], dur: 520 },
+      { notes: [261.63], chord: [], dur: 520 },
+      { notes: [349.23], chord: [174.61, 220.00, 261.63], dur: 520 },
+      { notes: [329.63], chord: [130.81, 196.00, 246.94], dur: 950 },
+
+      { notes: [261.63], chord: [], dur: 340 },
+      { notes: [261.63], chord: [], dur: 180 },
+      { notes: [293.66], chord: [130.81, 196.00, 246.94], dur: 520 },
+      { notes: [261.63], chord: [], dur: 520 },
+      { notes: [392.00], chord: [130.81, 196.00, 246.94], dur: 520 },
+      { notes: [349.23], chord: [174.61, 220.00, 261.63], dur: 950 },
+
+      { notes: [261.63], chord: [], dur: 340 },
+      { notes: [261.63], chord: [], dur: 180 },
+      { notes: [523.25], chord: [174.61, 220.00, 261.63], dur: 520 },
+      { notes: [440.00], chord: [], dur: 520 },
+      { notes: [349.23], chord: [116.54, 174.61, 233.08], dur: 520 },
+      { notes: [329.63], chord: [], dur: 520 },
+      { notes: [293.66], chord: [116.54, 174.61, 233.08], dur: 950 },
+
+      { notes: [466.16], chord: [], dur: 340 },
+      { notes: [466.16], chord: [], dur: 180 },
+      { notes: [440.00], chord: [174.61, 220.00, 261.63], dur: 520 },
+      { notes: [349.23], chord: [], dur: 520 },
+      { notes: [392.00], chord: [130.81, 196.00, 246.94], dur: 520 },
+      { notes: [349.23], chord: [174.61, 220.00, 261.63, 293.66], dur: 1200 }
+    ];
+
+    function initAudioEngine() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      const sampleRate = audioCtx.sampleRate;
+      const length = sampleRate * 1.8;
+      const impulse = audioCtx.createBuffer(2, length, sampleRate);
+      for (let ch = 0; ch < 2; ch++) {
+        const data = impulse.getChannelData(ch);
+        for (let i = 0; i < length; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.5);
+        }
+      }
+      reverbNode = audioCtx.createConvolver();
+      reverbNode.buffer = impulse;
+
+      const wetGain = audioCtx.createGain();
+      wetGain.gain.value = 0.35;
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0.7;
+
+      reverbNode.connect(wetGain);
+      wetGain.connect(masterGain);
+      masterGain.connect(audioCtx.destination);
+    }
+
+    function triggerWarmPianoTone(freq, durationMs, isChord = false) {
+      initAudioEngine();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const releaseTime = (durationMs / 1000) + (isChord ? 1.1 : 0.7);
+
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const env = audioCtx.createGain();
+
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(freq, now);
+
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(freq * 2, now);
+
+      const osc2Gain = audioCtx.createGain();
+      osc2Gain.gain.value = isChord ? 0.04 : 0.08;
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(isChord ? 900 : 1600, now);
+      filter.frequency.exponentialRampToValueAtTime(400, now + releaseTime);
+
+      const peakVol = isChord ? 0.07 : 0.22;
+      env.gain.setValueAtTime(0.0001, now);
+      env.gain.linearRampToValueAtTime(peakVol, now + 0.025);
+      env.gain.exponentialRampToValueAtTime(0.0001, now + releaseTime);
+
+      osc1.connect(filter);
+      osc2.connect(osc2Gain);
+      osc2Gain.connect(filter);
+
+      filter.connect(env);
+      env.connect(masterGain);
+      env.connect(reverbNode);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + releaseTime + 0.05);
+      osc2.stop(now + releaseTime + 0.05);
+    }
+
+    function playSongLoop() {
+      if (!isPlaying) return;
+      const step = songSteps[stepIndex];
+      step.notes.forEach(freq => triggerWarmPianoTone(freq, step.dur, false));
+      step.chord.forEach(freq => triggerWarmPianoTone(freq, step.dur * 1.4, true));
+
+      stepIndex = (stepIndex + 1) % songSteps.length;
+      const nextDelay = stepIndex === 0 ? step.dur + 900 : step.dur + 40;
+      melodyTimer = setTimeout(playSongLoop, nextDelay);
+    }
+
+    function updatePlayerUI(playing) {
+      if (playing) {
+        vinylDisc.classList.remove('paused-disc');
+        eqBars.classList.remove('eq-paused');
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+        trackSubtitle.textContent = 'Playing...';
+      } else {
+        vinylDisc.classList.add('paused-disc');
+        eqBars.classList.add('eq-paused');
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        trackSubtitle.textContent = 'Paused';
+      }
+    }
+
+    function startMusic() {
+      if (isPlaying) return;
+      isPlaying = true;
+      updatePlayerUI(true);
+      if (useCustomMp3) {
+        customAudio.play().catch(() => {
+          useCustomMp3 = false;
+          playSongLoop();
+        });
+      } else {
+        playSongLoop();
+      }
+    }
+
+    function stopMusic() {
+      isPlaying = false;
+      updatePlayerUI(false);
+      clearTimeout(melodyTimer);
+      customAudio.pause();
+    }
+
+    function toggleMusic() {
+      isPlaying ? stopMusic() : startMusic();
+    }
+
+    function openMagazine() {
+      const overlay = document.getElementById('welcomeOverlay');
+      overlay.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => overlay.remove(), 500);
+      startMusic();
+    }
+
+    // FUNGSI TIUP LILIN KUE ULANG TAHUN
+    function blowCandles() {
+      if (candlesBlown) return;
+      candlesBlown = true;
+
+      // Padamkan api lilin 1 dan 8
+      document.getElementById('flame1').classList.add('blown-out');
+      document.getElementById('flame2').classList.add('blown-out');
+
+      // Munculkan asap
+      const s1 = document.getElementById('smoke1');
+      const s2 = document.getElementById('smoke2');
+      s1.classList.remove('active');
+      s2.classList.remove('active');
+      void s1.offsetWidth;
+      s1.classList.add('active');
+      s2.classList.add('active');
+
+      // Update tampilan tombol & munculkan kartu ucapan
+      document.getElementById('blowBtn').textContent = '✨ Lilin Sudah Ditiup!';
+      document.getElementById('micStatus').classList.add('hidden');
+      document.getElementById('wishCard').classList.remove('hidden');
+
+      if (!isPlaying) startMusic();
+      launchConfetti();
+
+      if (micStream) {
+        micStream.getTracks().forEach(t => t.stop());
+        micStream = null;
+      }
+    }
+
+    function relightCandles() {
+      candlesBlown = false;
+      document.getElementById('flame1').classList.remove('blown-out');
+      document.getElementById('flame2').classList.remove('blown-out');
+      document.getElementById('blowBtn').textContent = '🌬️ Tiup Lilin Sekarang!';
+      document.getElementById('wishCard').classList.add('hidden');
+    }
+
+    // DETEKSI TIUPAN VIA MIKROFON HP
+    async function enableMicBlow() {
+      if (candlesBlown) relightCandles();
+      const statusEl = document.getElementById('micStatus');
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        statusEl.classList.remove('hidden');
+        statusEl.textContent = '🎙️ Mikrofon aktif! Coba tiup ke arah layar HP kamu sekarang~';
+
+        const micCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = micCtx.createMediaStreamSource(micStream);
+        const analyser = micCtx.createAnalyser();
+        analyser.fftSize = 256;
+        source.connect(analyser);
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        function detectBlow() {
+          if (candlesBlown || !micStream) return;
+          analyser.getByteFrequencyData(dataArray);
+          let sum = 0;
+          for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+          const average = sum / dataArray.length;
+
+          if (average > 48) {
+            blowCandles();
+            micCtx.close();
+          } else {
+            requestAnimationFrame(detectBlow);
+          }
+        }
+        detectBlow();
+      } catch (err) {
+        statusEl.classList.remove('hidden');
+        statusEl.textContent = 'Izin mikrofon ditolak, klik tombol "Tiup Lilin Sekarang!" aja ya~';
+      }
+    }
+
+    function launchConfetti() {
+      const shapes = ['🎉', '✨', '💖', '🎂', '🍓', '🎀'];
+      for (let i = 0; i < 36; i++) {
+        const conf = document.createElement('div');
+        conf.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+        conf.style.position = 'fixed';
+        conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.top = '-24px';
+        conf.style.fontSize = (14 + Math.random() * 12) + 'px';
+        conf.style.zIndex = '9999';
+        conf.style.pointerEvents = 'none';
+        conf.style.transition = 'transform 2.8s ease-out, opacity 2.8s ease-out';
+        document.body.appendChild(conf);
+        requestAnimationFrame(() => {
+          conf.style.transform = `translateY(${window.innerHeight + 60}px) rotate(${Math.random() * 540}deg)`;
+          conf.style.opacity = '0';
+        });
+        setTimeout(() => conf.remove(), 2900);
+      }
+    }
+  </script>
+</body>
+</html>
